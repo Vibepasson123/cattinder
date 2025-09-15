@@ -1,0 +1,3 @@
+export { CatInfoOverlay } from './CatInfoOverlay';
+
+

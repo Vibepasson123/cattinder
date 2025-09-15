@@ -1,0 +1,1 @@
+export { LikedCatsGrid } from './LikedCatsGrid';
