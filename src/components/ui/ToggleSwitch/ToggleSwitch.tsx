@@ -43,6 +43,7 @@ export const ToggleSwitch: React.FC<ToggleSwitchProps> = ({
     <Container>
       <ToggleButton
         isActive={activeTab === 'tinder'}
+        testID="tinder-button"
         onPress={() => onTabChange('tinder')}
         activeOpacity={0.8}
       >
@@ -51,6 +52,7 @@ export const ToggleSwitch: React.FC<ToggleSwitchProps> = ({
       
       <ToggleButton
         isActive={activeTab === 'star'}
+        testID="star-button"
         onPress={() => onTabChange('star')}
         activeOpacity={0.8}
       >

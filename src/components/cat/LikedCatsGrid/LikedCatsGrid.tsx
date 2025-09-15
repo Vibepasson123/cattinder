@@ -67,7 +67,7 @@ export const LikedCatsGrid: React.FC<LikedCatsGridProps> = ({
     return (
       <Container>
         <LoadingContainer>
-          <ActivityIndicator size="large" color={colors.primary} />
+          <ActivityIndicator testID="loading-spinner" size="large" color={colors.primary} />
         </LoadingContainer>
       </Container>
     );
@@ -77,7 +77,7 @@ export const LikedCatsGrid: React.FC<LikedCatsGridProps> = ({
     return (
       <Container>
         <EmptyContainer>
-          <EmptyText>No liked cats found yet!</EmptyText>
+          <EmptyText>No liked cats yet! Start swiping to find your favorites</EmptyText>
         </EmptyContainer>
       </Container>
     );
@@ -105,7 +105,7 @@ export const LikedCatsGrid: React.FC<LikedCatsGridProps> = ({
         ListFooterComponent={
           loading && likedCats.length > 0 ? (
             <SpinnerContainer>
-              <ActivityIndicator size="large" color={colors.primary} />
+              <ActivityIndicator testID="loading-more-spinner" size="large" color={colors.primary} />
             </SpinnerContainer>
           ) : null
         }

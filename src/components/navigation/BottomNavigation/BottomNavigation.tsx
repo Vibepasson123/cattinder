@@ -13,11 +13,11 @@ const Container = styled.View`
   border-radius: 30px;
   padding-horizontal: ${spacing.md}px;
   padding-vertical: ${spacing.sm}px;
-  shadow-color: rgba(191, 191, 192, 0.3);
+  shadow-color: ${colors.black};
   shadow-offset: 0px 2px;
-  shadow-opacity: 1;
-  shadow-radius: 10px;
-  elevation: 8;
+  shadow-opacity: 0.1;
+  shadow-radius: 4px;
+  elevation: 4;
   margin-horizontal: ${spacing.lg}px;
   margin-bottom: 50px;
   align-self: center;

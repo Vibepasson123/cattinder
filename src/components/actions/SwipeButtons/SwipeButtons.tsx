@@ -52,7 +52,7 @@ export const SwipeButtons: React.FC<SwipeButtonsProps> = ({
   return (
     <Container style={style}>
       <DislikeButton
-       
+        testID="dislike-button"
         onPress={onDislike}
         activeOpacity={0.8}
       >
@@ -60,7 +60,7 @@ export const SwipeButtons: React.FC<SwipeButtonsProps> = ({
       </DislikeButton>
       
       <LikeButton
-       
+        testID="like-button"
         onPress={onLike}
         activeOpacity={0.8}
       >
