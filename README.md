@@ -1,97 +1,174 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# Cat Tinder App
 
-# Getting Started
+A Tinder-like mobile app for cats, made with React Native and The Cat API. It lets users swipe on cat cards, like/dislike, and view matches. This doc try to explains how things are put together and how to run it locally.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+## Features
 
-## Step 1: Start Metro
+- Swipe interface with smooth animations (left = dislike, right = like)
+- Cat profiles powered by The Cat API (images + basic info)
+- Bottom tab navigation: Swipe, Matches, Profile
+- API integration with basic voting flows
+- Single-card stack with tilt and swipe
+- Action buttons for like and dislike
+- Works on iOS and Android, with platform-specific polish
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+## Screenshots
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+### Splash Screen
+<img src="screenshots/splash.png" width="200" height="400" alt="Splash Screen">
 
-```sh
-# Using npm
-npm start
+*The splash screen with lottie animation that shows when app starts. It matches the vibe of the project and gives nice entry feel.*
 
-# OR using Yarn
-yarn start
+### Main Swipe Interface
+<img src="screenshots/normal.png" width="200" height="400" alt="Normal View">
+
+*This is how the main swipe screen looks normally. You can see the cat card with info overlay and the like/dislike buttons at bottom.*
+
+### Swipe Animations
+<img src="screenshots/left.png" width="200" height="400" alt="Left Swipe">
+
+*When you swipe left to dislike, the card tilts and shows the red cross overlay with smooth animation.*
+
+<img src="screenshots/right.png" width="200" height="400" alt="Right Swipe">
+
+*When you swipe right to like, the card tilts and shows the green heart overlay. The animation feels natural and responsive.*
+
+### Liked Cats View
+<img src="screenshots/liked.png" width="200" height="400" alt="Liked Cats">
+
+*In the Star tab you can see all the cats you liked. The grid shows them nicely and you can scroll through your favorites.*
+
+## Tech Stack
+
+- React Native (0.81)
+- TypeScript
+- React Navigation (tabs + native stack)
+- Reanimated, Gesture Handler, and basic Animated APIs
+- Axios for network calls
+- Styled Components for styling
+- Jest + React Testing Library for tests
+
+## Project Structure
+
+```
+src/
+├── components/
+│   ├── actions/                    # Like/Dislike buttons
+│   ├── cat/
+│   │   └── SwipeableCatCard/       # Main swipeable card
+│   ├── navigation/
+│   │   └── BottomNavigation/       # Custom bottom tab bar
+│   └── ui/                         # Generic UI (e.g., SplashScreen)
+├── hooks/                          # Custom hooks (data, gestures, etc.)
+├── screens/
+│   ├── SwipeScreen/                # Swipe flow (stack + screen)
+│   ├── MatchesScreen/              # Matches list (placeholder now)
+│   └── ProfileScreen/              # User profile (placeholder now)
+├── services/
+│   └── api/
+│       └── CatAPI.ts               # The Cat API integration
+├── utils/
+│   └── constants/                  # colors, spacing, typography
+└── types/                          # TypeScript types
 ```
 
-## Step 2: Build and run your app
+Note: There is also `context/` prepared if we need shared state later, it is light right now.
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+## Getting Started
 
-### Android
+### Prerequisites
 
-```sh
-# Using npm
-npm run android
+- Node.js 18+
+- React Native CLI environment setup (Android Studio / Xcode)
+- iOS Simulator or Android Emulator (or device)
 
-# OR using Yarn
-yarn android
-```
-
-### iOS
-
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
-
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
+### Install
 
 ```sh
-bundle install
+npm install
 ```
 
-Then, and every time you update your native dependencies, run:
+#### iOS
 
 ```sh
-bundle exec pod install
+cd ios && pod install && cd ..
+npx react-native run-ios
 ```
 
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
+#### Android
 
 ```sh
-# Using npm
-npm run ios
-
-# OR using Yarn
-yarn ios
+npx react-native run-android
 ```
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+## Configuration (API)
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+We use The Cat API. By default the service reads an API key from code. For proper setup you should use env (and avoid committing sensitive keys). For now, the key can be changed in:
 
-## Step 3: Modify your app
+- `src/services/api/CatAPI.ts`
 
-Now that you have successfully run the app, let's make changes!
+Later we can move to `.env` with a small wrapper if needed.
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+## Development Notes
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+### Components
 
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
+Typical structure (not every component has all of these files yet):
 
-## Congratulations! :tada:
+- `ComponentName.tsx` – main component
+- `ComponentName.types.ts` – TS types and props
+- `index.ts` – exports
 
-You've successfully run and modified your React Native App. :partying_face:
+### Design System
 
-### Now what?
+- Colors: `src/utils/constants/colors.ts`
+- Spacing: `src/utils/constants/spacing.ts`
+- Typography: `src/utils/constants/typography.ts`
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
+## Testing
 
-# Troubleshooting
+We have unit and component tests for core areas (hooks, API, and some UI). To run tests:
 
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+```sh
+npm test -- --watchAll=false
+```
 
-# Learn More
+Some tests mock native modules and API. There might be minor "act(...)" warnings during async updates; those are planned to be polished.
 
-To learn more about React Native, take a look at the following resources:
+## Current Status
 
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+- Swipe flow works end-to-end with animations
+- Real cat images via The Cat API
+- Basic error and loading states present
+- Custom bottom tab with consistent shadow on Android and iOS
+- Portrait orientation locked on both platforms
+
+## Extra Work
+
+- Added a splash screen that matches the vibe and style of the project. It uses a small lottie animation and shows before the main app comes in, so the entry feels smoother.
+- The top toggle lets you switch between swipe view and seeing liked cats. You can view liked cats in the Star tab right on top and it refresh works fine.
+- Wrote tests (both unit and mock tests) that cover most of the critical parts: the Cat API service, the main swipe flow, liked-cats grid and important UI interactions. Some mocks are used to isolate native pieces and network.
+- SVG icons are used across the UI to keep transitions and visuals consistent on both platforms, which make the UI feel more clean when moving between screens.
+
+## Notes
+
+- The app is currently locked to portrait mode. I didn’t had time to build responsive layouts for both landscape and portrait. It’s quite easy to add later (mostly style updates and a couple layout tweaks), just didn’t get enough time this round.
+- All designs are followed according to the Figma as close as possible given the time.
+- On the cat card the design showed a number “4”. I wasn’t sure what it represented, so I mapped it to the "adaptability" field coming from the API, which seemed reasonable here.
+
+## Roadmap
+
+- Matches screen data and interactions
+- Better caching and offline handling
+- Move API key to env and add interceptor layer
+- More tests around edge cases and gestures
+
+## Troubleshooting
+
+- If Metro acts weird, try:
+  - `npx react-native start --reset-cache`
+  - kill old Metro: `pkill -f "react-native start"`
+- Ensure pods are installed after native deps change: `cd ios && pod install`
+
+
+
